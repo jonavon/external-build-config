@@ -1,3 +1,36 @@
+//
+// External build configuration
+//
+
+// Pointer to external build settings.
+ConfigObject buildConfig = grailsSettings.config
+
+// Default build file locations.
+// Note: ${userHome}/.grails/settings.groovy is already imported.  If only
+//       using settings.groovy this configuration setup is unnecessary.
+List buildConfigLocations = [
+	"${userHome}/.grails/${appName}-buildConfig.properties"
+	, "${userHome}/.grails/${appName}-buildConfig.groovy"
+	, "./${appName}-buildConfig.properties"
+	, "./${appName}-buildConfig.groovy"
+]
+
+// Read a system property for the build file location.
+if(System.properties["${appName}.build.config.location"]) {
+	buildConfigLocations << System.properties["${appName}.build.config.location"]
+}
+
+buildConfigLocations.each {
+	def bConfigLocation ->
+		File bConfig = new File(bConfigLocation.toString())
+		if(bConfig.exists()) {
+			buildConfig.merge(new ConfigSlurper(grailsSettings.grailsEnv).parse(bConfig.toURI().toURL()))
+		}
+}
+//
+// End External build configuration
+//
+
 grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
