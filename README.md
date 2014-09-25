@@ -1,7 +1,7 @@
 Externalizing Your Build Configuration In Grails
 ================================================
 
-Grails has several configuration files. Two significant files are `grails-app/conf/Config.groovy` and `grails-app/conf/BuildConfig.groovy` that are for runtime and build time configurations respectively. Configuration variables can be set in each of these files, but sometimes it would be beneficial to externalize variables. Grails allows for this by convention with the grails.config.locations variable that is set in `Config.groovy`. Howerever, there is no such facility in `BuildConfig.groovy`. Fortunately, externalizing your build configuration in grails can be achieved with a little modification to BuildConfig.groovy
+Grails has several configuration files. Two significant files are `grails-app/conf/Config.groovy` and `grails-app/conf/BuildConfig.groovy` that are for runtime and build time configurations respectively. Configuration variables can be set in each of these files, but sometimes it would be beneficial to externalize variables. Grails allows for this by convention with the grails.config.locations variable that is set in `Config.groovy`. However, there is no such facility in `BuildConfig.groovy`. Fortunately, externalizing your build configuration in grails can be achieved with a little modification to BuildConfig.groovy
 
 Guide
 -----
@@ -59,6 +59,7 @@ buildLocations.each {
 ### Create a script file
 
 ~~~~ {.groovy startFrom="1" data-fileName="PrintBuildSettings.groovy"}
+
 import grails.util.BuildSettings
 import grails.util.BuildSettingsHolder
 
@@ -170,9 +171,9 @@ class BuildConfigurationController {
 }
 ~~~~
 
-### Create a view \#\#\# We can create a view for the above controller in
+### Create a view
 
-grails-app/views/buildConfiguration/index.gsp. The html below creates a table with an entry for each key value pair in build settings.
+We can create a view for the above controller in grails-app/views/buildConfiguration/index.gsp. The html below creates a table with an entry for each key value pair in build settings.
 
 ~~~~ {.html startFrom="1" data-fileName="index.gsp"}
 <!DOCTYPE html>
