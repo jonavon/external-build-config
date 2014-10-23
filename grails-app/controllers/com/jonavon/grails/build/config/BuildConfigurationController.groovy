@@ -8,7 +8,7 @@ import grails.util.BuildSettingsHolder
 class BuildConfigurationController {
 
 	def index() {
-		Map settings = BuildSettingsHolder.getSettings().getConfig().flatten();
+		Map settings = BuildSettingsHolder.getSettings()?.getConfig()?.flatten();
 		[htmlTitle:"Build Settings", buildSettings: settings]
 	}
 }
